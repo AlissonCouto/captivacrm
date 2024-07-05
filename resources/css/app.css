@@ -1,0 +1,622 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* RESET */
+* {
+  padding: 0;
+  border: 0;
+  outline: none;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+html {
+  height: 100vh;
+  font-size: 62.5%;
+}
+
+.alert {
+  font-size: 1.6rem;
+}
+
+.popup {
+  padding: 8px;
+  color: #fff;
+  font-size: 1.5rem;
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.spinner {
+  width: 200px;
+  height: 200px;
+  border: 6px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #1660FF;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.w-32 {
+  width: 32px;
+}
+
+.h-32 {
+  height: 32px;
+}
+
+.popup-success {
+  background-color: #1cbf86;
+}
+
+.popup-danger {
+  background-color: #fb1432;
+}
+
+.is-invalid {
+  border: 1px solid #fb1432 !important;
+}
+
+.c-button {
+  border-radius: 5px;
+  font-weight: bold;
+  padding: 8px 32px;
+  font-size: 1.6rem;
+  margin: 0 5px;
+}
+
+.new-button {
+  background-color: #1E7145;
+  color: #fff;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  padding: 0 42px;
+  border-radius: 10px;
+  margin-left: 24px;
+}
+.new-button:hover {
+  background-color: #144b2e;
+  color: #fff;
+  font-weight: bold;
+}
+
+.btn-save {
+  background-color: #1cbf86;
+  color: #fff;
+}
+.btn-save:hover {
+  background-color: #046559;
+  color: #fff;
+}
+
+.btn-default {
+  background-color: #424242;
+  color: #fff;
+}
+.btn-default:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.search-container {
+  width: 80%;
+  height: 52px;
+}
+.search-container .input-group {
+  height: 52px;
+}
+.search-container .input-group input {
+  font-size: 2rem;
+  border: 1px solid #5f5f5f;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  background-color: #fff;
+  font-family: "Roboto", sans-serif;
+  padding-top: 0 !important;
+}
+.search-container .input-group button {
+  height: 100%;
+  border: none;
+  background-color: #1660FF;
+  color: #fff;
+  padding: 0 20px;
+  font-size: 1.8rem;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.search-container .input-group button:hover {
+  background-color: #0E43B2;
+}
+.search-container .input-group-append .btn {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* RESET */
+.app-container {
+  display: flex;
+}
+.app-container .sidebar {
+  background-color: #1660FF;
+  width: 76px;
+  height: 100vh;
+  border-top-right-radius: 10px;
+}
+.app-container .sidebar .menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 5px;
+}
+.app-container .sidebar .menu .menu-item {
+  border-radius: 10px;
+  height: 62px;
+  width: 62px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+.app-container .sidebar .menu .menu-item.-active, .app-container .sidebar .menu .menu-item:hover {
+  background-color: #0E43B2;
+}
+.app-container .sidebar .menu .menu-item.-active .menu-link, .app-container .sidebar .menu .menu-item:hover .menu-link {
+  text-decoration: underline;
+}
+.app-container .sidebar .menu .menu-item .menu-link {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
+}
+.app-container .sidebar .menu .menu-item .menu-link .icon {
+  font-size: 3.5rem;
+}
+.app-container .sidebar .menu .menu-item .menu-link .name {
+  margin-top: -13px;
+  font-size: 1.2rem;
+}
+.app-container .workspace {
+  padding: 0 24px;
+  background-color: #f6f6f6;
+  width: calc(100vw - 76px);
+  display: flex;
+  flex-direction: column;
+}
+.app-container .workspace .toolbar {
+  margin-top: 24px;
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.app-container .workspace .toolbar .operations {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 50%;
+}
+.app-container .workspace .toolbar .operations .form-container {
+  width: 80%;
+  height: 52px;
+}
+.app-container .workspace .toolbar .operations .form-container .input-group {
+  height: 52px;
+}
+.app-container .workspace .toolbar .operations .form-container .input-group input,
+.app-container .workspace .toolbar .operations .form-container .input-group select {
+  font-size: 2rem;
+  border: 1px solid #5f5f5f;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background-color: #fff;
+  font-family: "Roboto", sans-serif;
+}
+.app-container .workspace .toolbar .operations .form-container .input-group button {
+  height: 100%;
+  border: none;
+  background-color: #1660FF;
+  color: #fff;
+  padding: 0 20px;
+  font-size: 1.8rem;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.app-container .workspace .toolbar .operations .form-container .input-group button:hover {
+  background-color: #0E43B2;
+}
+.app-container .workspace .toolbar .operations .form-container .input-group-append .btn {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.app-container .workspace .toolbar .operations .excel-container a {
+  background-color: #1E7145;
+  color: #fff;
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  width: 52px;
+  border-radius: 10px;
+  margin-left: 24px;
+}
+.app-container .workspace .toolbar .operations .excel-container a img {
+  height: 100%;
+  width: 100%;
+}
+.app-container .workspace .toolbar .operations .excel-container a:hover {
+  background-color: #144b2e;
+}
+.app-container .workspace .toolbar .notifications {
+  margin-right: 22px;
+}
+.app-container .workspace .toolbar .notifications .icon {
+  position: relative;
+}
+.app-container .workspace .toolbar .notifications .icon i {
+  font-size: 5.5rem;
+}
+.app-container .workspace .toolbar .notifications .icon .number {
+  position: absolute;
+  top: 20px;
+  right: 4px;
+  font-size: 1.5rem;
+  background-color: #fb1432;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 22px;
+  color: #fff;
+  font-weight: bold;
+}
+.app-container .workspace .toolbar .account .edit-account a {
+  background-color: #5e5e5e;
+  color: #fff;
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  width: 52px;
+  border-radius: 50%;
+}
+.app-container .workspace .toolbar .account .edit-account a img {
+  height: 100%;
+  width: 100%;
+}
+.app-container .workspace .toolbar .account .edit-account a:hover {
+  background-color: #373737;
+}
+.app-container .workspace .toolbar .account .items {
+  display: none;
+  background-color: #fff;
+  color: #202124;
+  font-size: 1.4rem;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  width: 250px;
+  right: 24px;
+  top: 110px;
+}
+.app-container .workspace .toolbar .account .items.open {
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.app-container .workspace .toolbar .account .items a {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.6rem;
+  color: #000;
+  width: 100%;
+  padding: 6px;
+  cursor: pointer;
+}
+.app-container .workspace .toolbar .account .items a:hover {
+  background-color: #1660FF;
+  color: #fff;
+}
+.app-container .workspace .table-container .header-table {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.7rem;
+  padding: 24px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.app-container .workspace .table-container .header-table .meta-infos {
+  display: flex;
+  align-items: center;
+}
+.app-container .workspace .table-container .header-table .meta-infos .title {
+  margin-right: 24px;
+  font-weight: 700;
+}
+.app-container .workspace .table-container .header-table .meta-infos .filter {
+  display: flex;
+}
+.app-container .workspace .table-container .header-table .meta-infos .filter label {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+.app-container .workspace .table-container .header-table .meta-infos .filter input,
+.app-container .workspace .table-container .header-table .meta-infos .filter select {
+  padding-top: 22px;
+  font-size: 2rem !important;
+  border: 1px solid #5f5f5f;
+  border-radius: 10px;
+  background-color: #fff;
+  font-family: "Roboto", sans-serif;
+  display: block;
+  min-width: 150px;
+}
+.app-container .workspace .table-container .header-table .meta-infos .filter input,
+.app-container .workspace .table-container .header-table .meta-infos .filter select {
+  height: 52px;
+}
+.app-container .workspace .table-container .header-table .meta-infos .filter .form-floating {
+  margin-right: 10px;
+}
+.app-container .workspace .table-container .header-table .meta-infos .filter .filter-button {
+  background-color: #1E7145;
+  color: #fff;
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  width: 52px;
+  border-radius: 10px;
+  margin-left: 24px;
+}
+.app-container .workspace .table-container .header-table .meta-infos .filter .filter-button:hover {
+  background-color: #144b2e;
+}
+.app-container .workspace .table-container .header-table .pagination {
+  display: flex;
+  align-items: center;
+}
+.app-container .workspace .table-container .header-table .pagination .from {
+  margin: 0 5px;
+}
+.app-container .workspace .table-container .header-table .pagination .to {
+  margin: 0 5px;
+}
+.app-container .workspace .table-container .header-table .pagination .total {
+  margin: 0 0 0 5px;
+}
+.app-container .workspace .table-container .header-table .pagination .navigations {
+  font-size: 2.5rem;
+  margin-left: 10px;
+}
+.app-container .workspace .table-container .header-table .pagination .navigations .prev,
+.app-container .workspace .table-container .header-table .pagination .navigations .next {
+  color: #444746;
+}
+.app-container .workspace .table-container .header-table .pagination .navigations .prev.-inactive,
+.app-container .workspace .table-container .header-table .pagination .navigations .next.-inactive {
+  color: #aeb0af;
+}
+.app-container .workspace .table-container .body-table table {
+  font-family: "Roboto", sans-serif;
+}
+.app-container .workspace .table-container .body-table table thead tr th {
+  font-size: 2rem;
+}
+.app-container .workspace .table-container .body-table table tbody tr:hover {
+  background-color: #e9e9e9;
+}
+.app-container .workspace .table-container .body-table table tbody tr td {
+  font-size: 1.6rem;
+}
+.app-container .workspace .table-container .body-table table tbody .whatsapp {
+  background-color: #046559;
+  padding: 5px;
+  font-size: 1.5rem;
+  color: #fff;
+  border-radius: 5px;
+}
+.app-container .workspace .table-container .body-table table tbody .actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.app-container .workspace .table-container .body-table table tbody .actions .action {
+  margin-right: 10px;
+}
+.app-container .workspace .table-container .body-table table tbody .actions .action a {
+  padding: 5px;
+  font-size: 2rem;
+  color: #fff;
+  border-radius: 5px;
+}
+.app-container .workspace .table-container .body-table table tbody .actions .chat a {
+  background-color: #5b29d9;
+}
+.app-container .workspace .table-container .body-table table tbody .actions .chat a:hover {
+  background-color: #280a72;
+}
+.app-container .workspace .table-container .body-table table tbody .actions .details a {
+  background-color: #1660FF;
+}
+.app-container .workspace .table-container .body-table table tbody .actions .details a:hover {
+  background-color: #0E43B2;
+}
+.app-container .workspace .table-container .body-table table tbody .actions .edit a {
+  background-color: #fea601;
+}
+.app-container .workspace .table-container .body-table table tbody .actions .edit a:hover {
+  background-color: #b97a05;
+}
+.app-container .workspace .table-container .body-table table tbody .actions .delete a {
+  background-color: #fb1432;
+}
+.app-container .workspace .table-container .body-table table tbody .actions .delete a:hover {
+  background-color: #a30b1f;
+}
+.app-container .workspace .entity-container .header-container {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.7rem;
+  padding: 24px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.app-container .workspace .entity-container .header-container .meta-infos {
+  display: flex;
+  align-items: center;
+}
+.app-container .workspace .entity-container .header-container .meta-infos .title {
+  margin-right: 24px;
+  font-weight: 700;
+}
+.app-container .workspace .entity-container .form-default label {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+.app-container .workspace .entity-container .form-default input,
+.app-container .workspace .entity-container .form-default select,
+.app-container .workspace .entity-container .form-default textarea {
+  padding-top: 22px;
+  font-size: 2rem !important;
+  border: 1px solid #5f5f5f;
+  border-radius: 10px;
+  background-color: #fff;
+  font-family: "Roboto", sans-serif;
+  width: 100%;
+}
+.app-container .workspace .entity-container .form-default input,
+.app-container .workspace .entity-container .form-default select {
+  height: 52px;
+}
+.app-container .workspace .entity-container .form-default textarea {
+  height: 150px;
+}
+.app-container .workspace .entity-container .chat {
+  background-color: #f3f0ea;
+  height: calc(100vh - 200px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.app-container .workspace .entity-container .chat .messages {
+  height: calc(100% - 70px);
+  width: 100%;
+  border: 1px solid black;
+  font-family: "Roboto", sans-serif;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+.app-container .workspace .entity-container .chat .messages .messages-date {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #54656f;
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+.app-container .workspace .entity-container .chat .messages .line {
+  display: flex;
+  width: 100%;
+}
+.app-container .workspace .entity-container .chat .messages .line .message {
+  display: inline-block;
+  padding: 16px 8px;
+  font-size: 1.8rem;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.app-container .workspace .entity-container .chat .messages .line .message .meta-infos {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 1.4rem;
+}
+.app-container .workspace .entity-container .chat .messages .line .message .meta-infos .hour {
+  margin-right: 5px;
+}
+.app-container .workspace .entity-container .chat .messages .line .message .meta-infos .status {
+  font-size: 1.8rem;
+}
+.app-container .workspace .entity-container .chat .messages .line .message .meta-infos .status .read {
+  color: #56bfea;
+}
+.app-container .workspace .entity-container .chat .messages .line .message .meta-infos .status .failed {
+  color: #fb1432;
+}
+.app-container .workspace .entity-container .chat .messages .line.-lead {
+  justify-content: start;
+}
+.app-container .workspace .entity-container .chat .messages .line.-lead .message {
+  background-color: #fff;
+}
+.app-container .workspace .entity-container .chat .messages .line.-company {
+  justify-content: end;
+}
+.app-container .workspace .entity-container .chat .messages .line.-company .message {
+  background-color: #cce4ff;
+}
+.app-container .workspace .entity-container .chat .field {
+  height: 52px;
+  width: 100%;
+}
+.app-container .workspace .entity-container .chat .field form {
+  display: flex;
+}
+.app-container .workspace .entity-container .chat .field form textarea {
+  font-size: 1.6rem;
+  font-weight: 400;
+  width: 100%;
+  font-family: "Roboto", sans-serif;
+  padding: 16px;
+}
+.app-container .workspace .entity-container .chat .field form textarea::placeholder {
+  font-size: 1.8rem;
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+}
+.app-container .workspace .entity-container .chat .field form button {
+  background-color: #1660FF;
+  min-height: 100%;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  font-weight: bold;
+}
+.app-container .workspace .entity-container .chat .field form button:hover {
+  background: #0E43B2;
+}
+
+/*# sourceMappingURL=app.css.map */
