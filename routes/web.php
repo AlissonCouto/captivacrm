@@ -9,6 +9,7 @@ use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\SpreadsheetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -63,6 +64,10 @@ Route::middleware('auth')->group(function () {
     Route::put('/leads/editar/{lead}', [LeadController::class, 'update'])->name('leads.update');
     Route::get('/leads/deletar/{lead}', [LeadController::class, 'destroy'])->name('leads.destroy');
     Route::get('/leads/{lead}', [LeadController::class, 'show'])->name('leads.show');
+
+    // Operações por planilhas do excel
+    Route::get('/leads/planilha/upload', [SpreadsheetController::class, 'create'])->name('leads.spreadsheet.upload');
+    Route::post('/leads/planilha/store', [SpreadsheetController::class, 'store'])->name('leads.spreadsheet.store');
     /* Leads */
 
     /* Finanças */
@@ -78,7 +83,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/chat/store/{lead}', [ChatController::class, 'store'])->name('chat.store');
     Route::get('/total-status', [ChatController::class, 'totalStatus'])->name('status.total');
     /* Chat */
-    
+
     /* Finanças */
 
     /* Nichos */
@@ -97,4 +102,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

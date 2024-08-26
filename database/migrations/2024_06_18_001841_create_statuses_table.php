@@ -15,14 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
+            $table->text('description');
             $table->integer('status')->default(1);
             $table->integer('highlight')->default(0);
             $table->integer('order')->default(0);
-            
+
             $table->unsignedBigInteger('companyId')->nullable();
 
             $table->foreign('companyId')->references('id')->on('companies')->onDelete('cascade');
-            
+
             $table->timestamps();
         });
     }
