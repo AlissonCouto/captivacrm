@@ -3,18 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use PhpOffice\PhpSpreadsheet\IOFactory;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Redirect;
+
+use App\Services\SpreadSheetService;
 
 use App\Models\Niche;
 use App\Models\City;
 
 class SpreadsheetController extends Controller
 {
+
+    private $service;
+
+    public function __construct(SpreadSheetService $spreadSheet)
+    {
+        $this->service = $spreadSheet;
+    }
+
     public function create()
     {
 
@@ -26,58 +31,12 @@ class SpreadsheetController extends Controller
 
     public function store(Request $request)
     {
+        $return = $this->service->store($request);
 
-        $user = Auth::user();
-        $company = $user->company()->first();
+        if ($return['success']) {
+            return Redirect::route('leads.index')->with('success', $return);
+        }
 
-        // Verificando se o arquivo está presente
-        if ($request->hasFile('spreadsheet')) {
-
-            $file = $request->file('spreadsheet');
-            $path = $file->path();
-            $extension = $file->extension();
-
-            $spreadsheet = IOFactory::load($path); // Abrindo a planilha como objeto
-            $sheet = $spreadsheet->getActiveSheet(); // Pegando a aba ativa da planilha
-
-            $headersFile = [];
-            $valuesFile = [];
-
-            $qtdRows = $sheet->getHighestDataRow();
-            $highestColumn = $sheet->getHighestDataColumn();
-            $qtdCollumns = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn);
-
-            // Percorrendo as linhas
-            for ($r = 1; $r <= $qtdRows; $r++) {
-
-                // Percorrendo colunas
-                for ($c = 1; $c <= $qtdCollumns; $c++) {
-
-                    if ($r == 1) {
-                        // Definindo pelo indice da coluna
-                        $headersFile[$c] = strtolower($sheet->getCell([$c, $r])->getValue());
-                    } else {
-                        // Adicionando valores aos campos
-                        $value = $sheet->getCell([$c, $r])->getValue();
-
-                        if (!is_null($value)) {
-                            // Slug do nome
-                            if ($headersFile[$c] == 'name') {
-                                $slug = Str::slug((string) $value);
-                                $valuesFile[$r]['slug'] = $slug;
-                            }
-
-                            $valuesFile[$r][$headersFile[$c]] = (string) $value;
-                            $valuesFile[$r]['companyId'] = $company->id;
-                            $valuesFile[$r]['nicheId'] = $request->nicheId;
-                            $valuesFile[$r]['cityId'] = $request->cityId;
-                            $valuesFile[$r]['statusId'] = 1;
-                        }
-                    }
-                } // Percorre colunas
-            } // Percorre linhas
-
-            DB::table('leads')->insert($valuesFile);
-        } // Se arquivo presente
+        return Redirect::route('leads.spreadsheet.upload')->with('success', $return);
     } // store()
 }
