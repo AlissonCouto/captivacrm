@@ -38,7 +38,7 @@
                     @csrf
                     <div class="row">
 
-                        <div class="col-12 mb-5">
+                        <div class="col-12 col-md-6 mb-5">
                             <label for="spreadsheet-field" class="input-file-spreadsheet">
                                 <input type="file" id="spreadsheet-field" name="spreadsheet" class="d-none">
                                 <strong>Escolher arquivo</strong>
@@ -66,11 +66,22 @@
                         <div class="col-12 col-md-6 mb-5">
 
                             <div class="form-floating">
-                                <select id="cityId" class="form-control @error('cityId') is-invalid @enderror" name="cityId" required>
-                                    <option value="" selected>Selecione</option>
+                                <select id="uf" class="form-control states @error('uf') is-invalid @enderror" name="uf">
+                                    @foreach($states as $k => $state)
+                                    <option value="{{$state->uf}}" {{ old('uf') == $state->uf || $k == 0 ? 'selected' : '' }}>{{$state->name}}</option>
+                                    @endforeach
+                                </select>
+                                <label for="uf">Estado</label>
+                            </div>
 
-                                    @foreach($cities as $city)
-                                    <option value="{{$city->id}}" {{ old('cityId') == $city->id ? 'selected' : '' }}>{{$city->nome}}</option>
+                        </div>
+
+                        <div class="col-12 col-md-6 mb-5">
+
+                            <div class="form-floating">
+                                <select id="cityId" class="form-control cities @error('cityId') is-invalid @enderror" name="cityId">
+                                    @foreach($cities as $k => $city)
+                                    <option value="{{$city->id}}" {{ old('cityId') == $city->id || $k == 0 ? 'selected' : '' }}>{{$city->nome}}</option>
                                     @endforeach
                                 </select>
                                 <label for="cityId">Cidade</label>

@@ -9,6 +9,7 @@ use App\Services\SpreadSheetService;
 
 use App\Models\Niche;
 use App\Models\City;
+use App\Models\State;
 
 class SpreadsheetController extends Controller
 {
@@ -24,9 +25,11 @@ class SpreadsheetController extends Controller
     {
 
         $niches = Niche::where('status', 1)->orderby('name', 'ASC')->get();
-        $cities = City::where('id_estado', 1)->orderby('nome', 'ASC')->get();
+        $states = State::orderby('name', 'ASC')->get();
+        $firstState = $states[0];
+        $cities = City::where('id_estado', $firstState->id)->orderby('nome', 'ASC')->get();
 
-        return view('admin.leads.spreadsheet.create')->with(compact('niches', 'cities'));
+        return view('admin.leads.spreadsheet.create')->with(compact('niches', 'states', 'cities'));
     } // create()
 
     public function store(Request $request)

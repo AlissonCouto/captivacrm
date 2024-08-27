@@ -184,6 +184,7 @@ class ComposerStaticInit04141957bd6a28d153884fe3077b256e
         array (
             'Cron\\' => 5,
             'Complex\\' => 8,
+            'Clue\\Redis\\Protocol\\' => 20,
             'Clue\\React\\Redis\\' => 17,
             'Carbon\\Doctrine\\' => 16,
             'Carbon\\' => 7,
@@ -580,6 +581,10 @@ class ComposerStaticInit04141957bd6a28d153884fe3077b256e
         array (
             0 => __DIR__ . '/..' . '/markbaker/complex/classes/src',
         ),
+        'Clue\\Redis\\Protocol\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/clue/redis-protocol/src',
+        ),
         'Clue\\React\\Redis\\' => 
         array (
             0 => __DIR__ . '/..' . '/clue/redis-react/src',
@@ -600,16 +605,6 @@ class ComposerStaticInit04141957bd6a28d153884fe3077b256e
         array (
             0 => __DIR__ . '/../..' . '/app',
             1 => __DIR__ . '/..' . '/laravel/pint/app',
-        ),
-    );
-
-    public static $prefixesPsr0 = array (
-        'C' => 
-        array (
-            'Clue\\Redis\\Protocol' => 
-            array (
-                0 => __DIR__ . '/..' . '/clue/redis-protocol/src',
-            ),
         ),
     );
 
@@ -686,6 +681,7 @@ class ComposerStaticInit04141957bd6a28d153884fe3077b256e
         'App\\Services\\NicheService' => __DIR__ . '/../..' . '/app/Services/NicheService.php',
         'App\\Services\\ResourceService' => __DIR__ . '/../..' . '/app/Services/ResourceService.php',
         'App\\Services\\SettingService' => __DIR__ . '/../..' . '/app/Services/SettingService.php',
+        'App\\Services\\SpreadSheetService' => __DIR__ . '/../..' . '/app/Services/SpreadSheetService.php',
         'App\\Services\\StatusService' => __DIR__ . '/../..' . '/app/Services/StatusService.php',
         'App\\View\\Components\\AppLayout' => __DIR__ . '/../..' . '/app/View/Components/AppLayout.php',
         'App\\View\\Components\\GuestLayout' => __DIR__ . '/../..' . '/app/View/Components/GuestLayout.php',
@@ -801,21 +797,21 @@ class ComposerStaticInit04141957bd6a28d153884fe3077b256e
         'Clue\\React\\Redis\\Factory' => __DIR__ . '/..' . '/clue/redis-react/src/Factory.php',
         'Clue\\React\\Redis\\LazyClient' => __DIR__ . '/..' . '/clue/redis-react/src/LazyClient.php',
         'Clue\\React\\Redis\\StreamingClient' => __DIR__ . '/..' . '/clue/redis-react/src/StreamingClient.php',
-        'Clue\\Redis\\Protocol\\Factory' => __DIR__ . '/..' . '/clue/redis-protocol/src/Clue/Redis/Protocol/Factory.php',
-        'Clue\\Redis\\Protocol\\Model\\BulkReply' => __DIR__ . '/..' . '/clue/redis-protocol/src/Clue/Redis/Protocol/Model/BulkReply.php',
-        'Clue\\Redis\\Protocol\\Model\\ErrorReply' => __DIR__ . '/..' . '/clue/redis-protocol/src/Clue/Redis/Protocol/Model/ErrorReply.php',
-        'Clue\\Redis\\Protocol\\Model\\IntegerReply' => __DIR__ . '/..' . '/clue/redis-protocol/src/Clue/Redis/Protocol/Model/IntegerReply.php',
-        'Clue\\Redis\\Protocol\\Model\\ModelInterface' => __DIR__ . '/..' . '/clue/redis-protocol/src/Clue/Redis/Protocol/Model/ModelInterface.php',
-        'Clue\\Redis\\Protocol\\Model\\MultiBulkReply' => __DIR__ . '/..' . '/clue/redis-protocol/src/Clue/Redis/Protocol/Model/MultiBulkReply.php',
-        'Clue\\Redis\\Protocol\\Model\\Request' => __DIR__ . '/..' . '/clue/redis-protocol/src/Clue/Redis/Protocol/Model/Request.php',
-        'Clue\\Redis\\Protocol\\Model\\StatusReply' => __DIR__ . '/..' . '/clue/redis-protocol/src/Clue/Redis/Protocol/Model/StatusReply.php',
-        'Clue\\Redis\\Protocol\\Parser\\MessageBuffer' => __DIR__ . '/..' . '/clue/redis-protocol/src/Clue/Redis/Protocol/Parser/MessageBuffer.php',
-        'Clue\\Redis\\Protocol\\Parser\\ParserException' => __DIR__ . '/..' . '/clue/redis-protocol/src/Clue/Redis/Protocol/Parser/ParserException.php',
-        'Clue\\Redis\\Protocol\\Parser\\ParserInterface' => __DIR__ . '/..' . '/clue/redis-protocol/src/Clue/Redis/Protocol/Parser/ParserInterface.php',
-        'Clue\\Redis\\Protocol\\Parser\\RequestParser' => __DIR__ . '/..' . '/clue/redis-protocol/src/Clue/Redis/Protocol/Parser/RequestParser.php',
-        'Clue\\Redis\\Protocol\\Parser\\ResponseParser' => __DIR__ . '/..' . '/clue/redis-protocol/src/Clue/Redis/Protocol/Parser/ResponseParser.php',
-        'Clue\\Redis\\Protocol\\Serializer\\RecursiveSerializer' => __DIR__ . '/..' . '/clue/redis-protocol/src/Clue/Redis/Protocol/Serializer/RecursiveSerializer.php',
-        'Clue\\Redis\\Protocol\\Serializer\\SerializerInterface' => __DIR__ . '/..' . '/clue/redis-protocol/src/Clue/Redis/Protocol/Serializer/SerializerInterface.php',
+        'Clue\\Redis\\Protocol\\Factory' => __DIR__ . '/..' . '/clue/redis-protocol/src/Factory.php',
+        'Clue\\Redis\\Protocol\\Model\\BulkReply' => __DIR__ . '/..' . '/clue/redis-protocol/src/Model/BulkReply.php',
+        'Clue\\Redis\\Protocol\\Model\\ErrorReply' => __DIR__ . '/..' . '/clue/redis-protocol/src/Model/ErrorReply.php',
+        'Clue\\Redis\\Protocol\\Model\\IntegerReply' => __DIR__ . '/..' . '/clue/redis-protocol/src/Model/IntegerReply.php',
+        'Clue\\Redis\\Protocol\\Model\\ModelInterface' => __DIR__ . '/..' . '/clue/redis-protocol/src/Model/ModelInterface.php',
+        'Clue\\Redis\\Protocol\\Model\\MultiBulkReply' => __DIR__ . '/..' . '/clue/redis-protocol/src/Model/MultiBulkReply.php',
+        'Clue\\Redis\\Protocol\\Model\\Request' => __DIR__ . '/..' . '/clue/redis-protocol/src/Model/Request.php',
+        'Clue\\Redis\\Protocol\\Model\\StatusReply' => __DIR__ . '/..' . '/clue/redis-protocol/src/Model/StatusReply.php',
+        'Clue\\Redis\\Protocol\\Parser\\MessageBuffer' => __DIR__ . '/..' . '/clue/redis-protocol/src/Parser/MessageBuffer.php',
+        'Clue\\Redis\\Protocol\\Parser\\ParserException' => __DIR__ . '/..' . '/clue/redis-protocol/src/Parser/ParserException.php',
+        'Clue\\Redis\\Protocol\\Parser\\ParserInterface' => __DIR__ . '/..' . '/clue/redis-protocol/src/Parser/ParserInterface.php',
+        'Clue\\Redis\\Protocol\\Parser\\RequestParser' => __DIR__ . '/..' . '/clue/redis-protocol/src/Parser/RequestParser.php',
+        'Clue\\Redis\\Protocol\\Parser\\ResponseParser' => __DIR__ . '/..' . '/clue/redis-protocol/src/Parser/ResponseParser.php',
+        'Clue\\Redis\\Protocol\\Serializer\\RecursiveSerializer' => __DIR__ . '/..' . '/clue/redis-protocol/src/Serializer/RecursiveSerializer.php',
+        'Clue\\Redis\\Protocol\\Serializer\\SerializerInterface' => __DIR__ . '/..' . '/clue/redis-protocol/src/Serializer/SerializerInterface.php',
         'Complex\\Complex' => __DIR__ . '/..' . '/markbaker/complex/classes/src/Complex.php',
         'Complex\\Exception' => __DIR__ . '/..' . '/markbaker/complex/classes/src/Exception.php',
         'Complex\\Functions' => __DIR__ . '/..' . '/markbaker/complex/classes/src/Functions.php',
@@ -3073,6 +3069,9 @@ class ComposerStaticInit04141957bd6a28d153884fe3077b256e
         'Laravel\\Reverb\\Contracts\\Logger' => __DIR__ . '/..' . '/laravel/reverb/src/Contracts/Logger.php',
         'Laravel\\Reverb\\Contracts\\ServerProvider' => __DIR__ . '/..' . '/laravel/reverb/src/Contracts/ServerProvider.php',
         'Laravel\\Reverb\\Contracts\\WebSocketConnection' => __DIR__ . '/..' . '/laravel/reverb/src/Contracts/WebSocketConnection.php',
+        'Laravel\\Reverb\\Events\\ChannelCreated' => __DIR__ . '/..' . '/laravel/reverb/src/Events/ChannelCreated.php',
+        'Laravel\\Reverb\\Events\\ChannelRemoved' => __DIR__ . '/..' . '/laravel/reverb/src/Events/ChannelRemoved.php',
+        'Laravel\\Reverb\\Events\\ConnectionPruned' => __DIR__ . '/..' . '/laravel/reverb/src/Events/ConnectionPruned.php',
         'Laravel\\Reverb\\Events\\MessageReceived' => __DIR__ . '/..' . '/laravel/reverb/src/Events/MessageReceived.php',
         'Laravel\\Reverb\\Events\\MessageSent' => __DIR__ . '/..' . '/laravel/reverb/src/Events/MessageSent.php',
         'Laravel\\Reverb\\Exceptions\\InvalidApplication' => __DIR__ . '/..' . '/laravel/reverb/src/Exceptions/InvalidApplication.php',
@@ -7372,7 +7371,6 @@ class ComposerStaticInit04141957bd6a28d153884fe3077b256e
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit04141957bd6a28d153884fe3077b256e::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit04141957bd6a28d153884fe3077b256e::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit04141957bd6a28d153884fe3077b256e::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit04141957bd6a28d153884fe3077b256e::$classMap;
 
         }, null, ClassLoader::class);

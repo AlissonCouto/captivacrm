@@ -2,14 +2,12 @@
 
 namespace Clue\Redis\Protocol\Parser;
 
-use Clue\Redis\Protocol\Parser\ParserInterface;
 use Clue\Redis\Protocol\Model\ModelInterface;
 use Clue\Redis\Protocol\Model\BulkReply;
 use Clue\Redis\Protocol\Model\ErrorReply;
 use Clue\Redis\Protocol\Model\IntegerReply;
 use Clue\Redis\Protocol\Model\MultiBulkReply;
 use Clue\Redis\Protocol\Model\StatusReply;
-use Clue\Redis\Protocol\Parser\ParserException;
 
 /**
  * Simple recursive redis wire protocol parser
@@ -143,7 +141,6 @@ class ResponseParser implements ParserInterface
                 break;
             default:
                 throw new ParserException('Invalid message can not be parsed: "' . $reply . '"');
-                break;
         }
         /* Party on */
         return $response;
