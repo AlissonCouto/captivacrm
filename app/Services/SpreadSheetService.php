@@ -58,6 +58,7 @@ class SpreadSheetService
                             }
 
                             $valuesFile[$r][$headersFile[$c]] = (string) $value;
+                            $valuesFile[$r]['created_at'] = date('Y-m-d H:i:s');
                             $valuesFile[$r]['companyId'] = $company->id;
                             $valuesFile[$r]['nicheId'] = $data->nicheId;
                             $valuesFile[$r]['cityId'] = $data->cityId;

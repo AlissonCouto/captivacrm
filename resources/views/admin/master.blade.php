@@ -78,8 +78,6 @@
 
 <body>
 
-
-
     <div class="app-container">
 
         <div class="sidebar">

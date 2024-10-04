@@ -72,14 +72,14 @@
 
                             <div class="col-12 col-md-6 mb-5">
                                 <div class="form-floating">
-                                    <input type="date" name="lastContact" id="lastContact" class="form-control @error('lastContact') is-invalid @enderror" value="{{date('Y-m-d', strtotime($entity->lastContact))}}" disabled>
+                                    <input type="date" name="lastContact" id="lastContact" class="form-control @error('lastContact') is-invalid @enderror" value="{{$entity->lastContact ? date('Y-m-d', strtotime($entity->lastContact)) : null}}" disabled>
                                     <label for="lastContact">Último contato</label>
                                 </div>
                             </div>
 
                             <div class="col-12 col-md-6 mb-5">
                                 <div class="form-floating">
-                                    <input type="date" name="callScheduled" id="callScheduled" class="form-control @error('callScheduled') is-invalid @enderror" value="{{date('Y-m-d', strtotime($entity->callScheduled))}}" disabled>
+                                    <input type="date" name="callScheduled" id="callScheduled" class="form-control @error('callScheduled') is-invalid @enderror" value="{{$entity->callScheduled ? date('Y-m-d', strtotime($entity->callScheduled)) : null}}" disabled>
                                     <label for="callScheduled">Chamada agendada</label>
                                 </div>
                             </div>

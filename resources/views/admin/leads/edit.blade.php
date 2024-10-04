@@ -74,16 +74,40 @@
                                 </div>
                             </div>
 
+                            @php
+
+                            if(old('lastContact')){
+                                $lastContact = date('Y-m-d', strtotime(old('lastContact')));
+                            }else if($entity->lastContact){
+                                $lastContact = date('Y-m-d', strtotime($entity->lastContact));
+                            }else{
+                                $lastContact = null;
+                            }
+
+                            @endphp
+
                             <div class="col-12 col-md-6 mb-5">
                                 <div class="form-floating">
-                                    <input type="date" name="lastContact" id="lastContact" class="form-control @error('lastContact') is-invalid @enderror" value="{{old('lastContact') ? date('Y-m-d', strtotime(old('lastContact'))) : date('Y-m-d', strtotime($entity->lastContact))}}">
+                                    <input type="date" name="lastContact" id="lastContact" class="form-control @error('lastContact') is-invalid @enderror" value="{{$lastContact}}">
                                     <label for="lastContact">Último contato</label>
                                 </div>
                             </div>
 
+                            @php
+
+                            if(old('callScheduled')){
+                                $callScheduled = date('Y-m-d', strtotime(old('callScheduled')));
+                            }else if($entity->callScheduled){
+                                $callScheduled = date('Y-m-d', strtotime($entity->callScheduled));
+                            }else{
+                                $callScheduled = null;
+                            }
+
+                            @endphp
+
                             <div class="col-12 col-md-6 mb-5">
                                 <div class="form-floating">
-                                    <input type="date" name="callScheduled" id="callScheduled" class="form-control @error('callScheduled') is-invalid @enderror" value="{{old('callScheduled') ? date('Y-m-d', strtotime(old('callScheduled'))) : date('Y-m-d', strtotime($entity->callScheduled))}}">
+                                    <input type="date" name="callScheduled" id="callScheduled" class="form-control @error('callScheduled') is-invalid @enderror" value="{{$callScheduled}}">
                                     <label for="callScheduled">Chamada agendada</label>
                                 </div>
                             </div>
