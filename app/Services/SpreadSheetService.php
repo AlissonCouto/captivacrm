@@ -51,7 +51,6 @@ class SpreadSheetService
                             // Adicionando valores aos campos
                             $value = $sheet->getCell([$c, $r])->getValue();
 
-                            //if (!is_null($value)) {
                             // Slug do nome
                             if ($headersFile[$c] == 'name') {
                                 $slug = Str::slug((string) $value);
@@ -63,10 +62,20 @@ class SpreadSheetService
                             $valuesFile[$r]['nicheId'] = $data->nicheId;
                             $valuesFile[$r]['cityId'] = $data->cityId;
                             $valuesFile[$r]['statusId'] = 1;
-                            //}
                         }
+                        
                     } // Percorre colunas
+                    
                 } // Percorre linhas
+                
+                // Limpando linhas vazias
+                foreach($valuesFile as $k => &$item){
+                    
+                    if(empty($item['name'])){
+                        unset($valuesFile[$k]);
+                    }
+
+                }
 
                 $leads = DB::table('leads')->insert($valuesFile);
 
