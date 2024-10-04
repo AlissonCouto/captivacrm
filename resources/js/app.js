@@ -10,6 +10,15 @@ import './chat';
 
 jQuery(function($){
 
+    // Opções de conta
+    $('.account .edit-account a').on('click', function(e){
+
+        e.preventDefault();
+
+        $('.account .items').toggleClass('open');
+
+    });
+
     /* Controle de popups */
     var $popup = $('.popup');
     if($popup.length > 0){

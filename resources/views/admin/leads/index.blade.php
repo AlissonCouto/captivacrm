@@ -1,20 +1,20 @@
 @extends('admin.master')
 
 @section('content')
-    <div class="toolbar d-flex align-items-center justify-content-end">
-        @include('admin.components.toolbar.notification')
-        @include('admin.components.toolbar.account')
-    </div><!-- .toolbar -->
+<div class="toolbar d-flex align-items-center justify-content-end">
+    @include('admin.components.toolbar.notification')
+    @include('admin.components.toolbar.account')
+</div><!-- .toolbar -->
 
-    @if(session()->has('success'))
-        <div class="col-12 m-b-5">
-            <div class="popup popup-{{ session('success')['success'] ? 'success' : 'danger' }}">
-                {{ session('success')['message'] }}
-            </div>
-        </div>
-    @endif
+@if(session()->has('success'))
+<div class="col-12 m-b-5">
+    <div class="popup popup-{{ session('success')['success'] ? 'success' : 'danger' }}">
+        {{ session('success')['message'] }}
+    </div>
+</div>
+@endif
 
-    <div class="table-container">
+<div class="table-container">
 
     <div class="header-table">
 
@@ -26,16 +26,16 @@
 
                 <form class="search-container" action="{{route('leads.consult')}}" method="post" id="search-entity">
                     <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Pesquisar" name="search" id="search">
+                        <input type="text" class="form-control" placeholder="Pesquisar" name="search" id="search">
 
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="submit">
-                                    <i class="mdi mdi-magnify"></i>
-                                </button>
-                            </div>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit">
+                                <i class="mdi mdi-magnify"></i>
+                            </button>
+                        </div>
                     </div>
                 </form>
-                
+
                 <a href="{{route('leads.create')}}" class="new-button">Novo</i></a>
 
             </div>
@@ -43,7 +43,7 @@
         </div> <!-- .meta-infos -->
 
         <div class="pagination">
-            <div class="from">{{ $entity->firstItem() }}</div> - 
+            <div class="from">{{ $entity->firstItem() }}</div> -
             <div class="to">{{ $entity->lastItem() }}</div>
             <span>de</span>
             <div class="total">{{ $entity->total() }}</div>
@@ -63,49 +63,49 @@
 
     <div class="header-table">
 
-    <div class="meta-infos">
+        <div class="meta-infos">
 
-        <div class="filter">
+            <div class="filter">
 
-            <div class="form-floating">
-                <select  id="withWhatsapp" class="form-control" name="withWhatsapp">
-                    <option value="" selected>Selecione...</option>    
-                    <option value="yes">Sim</option>
-                    <option value="no">Não</option>
-                </select>
-                <label for="withWhatsapp">Whatsapp?</label>
-            </div>
+                <div class="form-floating">
+                    <select id="withWhatsapp" class="form-control" name="withWhatsapp">
+                        <option value="" selected>Selecione...</option>
+                        <option value="yes">Sim</option>
+                        <option value="no">Não</option>
+                    </select>
+                    <label for="withWhatsapp">Whatsapp?</label>
+                </div>
 
-            <div class="form-floating">
-                <select  id="status" class="form-control" name="status">
-                    <option value="" selected>Selecione...</option>    
-                    @foreach($statuses as $status)
+                <div class="form-floating">
+                    <select id="status" class="form-control" name="status">
+                        <option value="" selected>Selecione...</option>
+                        @foreach($statuses as $status)
                         <option value="{{$status->id}}">{{$status->name}}</option>
-                    @endforeach
-                </select>
-                <label for="status">Status</label>
-            </div>
+                        @endforeach
+                    </select>
+                    <label for="status">Status</label>
+                </div>
 
-            <div class="form-floating">
-                <input id="lastContact" type="date" name="lastContact">
-                <label for="lastContact">Último contato</label>
-            </div>
+                <div class="form-floating">
+                    <input id="lastContact" type="date" name="lastContact">
+                    <label for="lastContact">Último contato</label>
+                </div>
 
-            <div class="form-floating">
-                <input id="callScheduled" type="date" name="callScheduled">
-                <label for="callScheduled">Chamada agendada</label>
-            </div>
+                <div class="form-floating">
+                    <input id="callScheduled" type="date" name="callScheduled">
+                    <label for="callScheduled">Chamada agendada</label>
+                </div>
 
-            <div class="form-floating">
-                <input id="created_at" type="date" name="created_at">
-                <label for="created_at">Salvo em</label>
-            </div>
+                <div class="form-floating">
+                    <input id="created_at" type="date" name="created_at">
+                    <label for="created_at">Salvo em</label>
+                </div>
 
-            <button type="button" class="filter-button"><i class="mdi mdi-magnify"></i></button>
+                <button type="button" class="filter-button"><i class="mdi mdi-magnify"></i></button>
+
+            </div>
 
         </div>
-
-    </div>
 
     </div>
 
@@ -129,81 +129,81 @@
             <tbody>
 
                 @if($entity->count())
-                    @foreach($entity as $row)
-                        <tr>
-                            <td>{{$row->name}}</td>
-                            <td>
-                            
-                                @if($row->phone)
-                                    <a href="https://api.whatsapp.com/send?phone=55{{ str_replace(['(', ')', '-', ' '], ['', '', '', ''], $row->phone) }}" target="_blank"><span class="whatsapp"><i class="mdi mdi-whatsapp icon"></i></span> {{$row->phone}}</a>
-                                @else
-                                    --
-                                @endif
+                @foreach($entity as $row)
+                <tr>
+                    <td>{{$row->name}}</td>
+                    <td>
 
-                            </td>
-                            <td>{{$row->website ? $row->website : '--'}}</td>
-                            <td>
+                        @if($row->phone)
+                        <a href="https://api.whatsapp.com/send?phone=55{{ str_replace(['(', ')', '-', ' '], ['', '', '', ''], $row->phone) }}" target="_blank"><span class="whatsapp"><i class="mdi mdi-whatsapp icon"></i></span> {{$row->phone}}</a>
+                        @else
+                        --
+                        @endif
 
-                                @php
-                                    $niche = $row->niche()->first();
-                                @endphp
+                    </td>
+                    <td>{{$row->website ? $row->website : '--'}}</td>
+                    <td>
 
-                                {{ $niche ? $niche->name : '--' }}
-                            </td>
-                            
-                            <td>
+                        @php
+                        $niche = $row->niche()->first();
+                        @endphp
 
-                                @php
-                                    $city = $row->city()->first();
-                                @endphp
+                        {{ $niche ? $niche->name : '--' }}
+                    </td>
 
-                                {{ $city ? $city->nome : '--' }}
-                            </td>
+                    <td>
 
-                            <td>
-                                {{ $city ? $city->uf : '--' }}
-                            </td>
+                        @php
+                        $city = $row->city()->first();
+                        @endphp
 
-                            <td>
-                                {{ $row->status == 1 ? 'Sim' : 'Não' }}
-                            </td>
+                        {{ $city ? $city->nome : '--' }}
+                    </td>
 
-                            <td>
-                                <div class="actions">
-                                
-                                    <div class="action chat">
-                                        <a href="{{route('chat.index', $row->id)}}"><i class="mdi mdi-chat"></i></a>
-                                    </div>
+                    <td>
+                        {{ $city ? $city->uf : '--' }}
+                    </td>
 
-                                    <div class="action details">
-                                        <a href="{{route('leads.show', $row->id)}}"><i class="mdi mdi-magnify"></i></a>
-                                    </div>
+                    <td>
+                        {{ $row->status == 1 ? 'Sim' : 'Não' }}
+                    </td>
 
-                                    <div class="action edit">
-                                        <a href="{{route('leads.edit', $row->id)}}"><i class="mdi mdi-pencil icon"></i></a>
-                                    </div>
+                    <td>
+                        <div class="actions">
 
-                                    <div class="action delete">
-                                        <a href="{{route('leads.destroy', $row->id)}}"><i class="mdi mdi-delete icon"></i></a>
-                                    </div>
+                            <div class="action chat">
+                                <a href="{{route('chat.index', $row->id)}}"><i class="mdi mdi-chat"></i></a>
+                            </div>
 
-                                </div>
-                            </td>
+                            <div class="action details">
+                                <a href="{{route('leads.show', $row->id)}}"><i class="mdi mdi-magnify"></i></a>
+                            </div>
 
-                        </tr>
-                    @endforeach
+                            <div class="action edit">
+                                <a href="{{route('leads.edit', $row->id)}}"><i class="mdi mdi-pencil icon"></i></a>
+                            </div>
+
+                            <div class="action delete">
+                                <a href="{{route('leads.destroy', $row->id)}}"><i class="mdi mdi-delete icon"></i></a>
+                            </div>
+
+                        </div>
+                    </td>
+
+                </tr>
+                @endforeach
                 @else
-                    <tr>
-                        <td colspan="6" class="text-center pt-5">
-                            <h1 class="h1">Nenhum registro encontrado</h1>
-                        </td>
-                    </tr>
+                <tr>
+                    <td colspan="6" class="text-center pt-5">
+                        <h1 class="h1">Nenhum registro encontrado</h1>
+                    </td>
+                </tr>
                 @endif
             </tbody>
         </table>
 
     </div>
 
-    </div>
+</div>
 
 @endsection

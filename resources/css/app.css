@@ -319,7 +319,7 @@ html {
   position: absolute;
   width: 250px;
   right: 24px;
-  top: 110px;
+  top: 160px;
 }
 .app-container .workspace .toolbar .account .items.open {
   z-index: 9999;

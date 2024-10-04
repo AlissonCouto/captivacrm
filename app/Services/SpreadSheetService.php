@@ -51,19 +51,19 @@ class SpreadSheetService
                             // Adicionando valores aos campos
                             $value = $sheet->getCell([$c, $r])->getValue();
 
-                            if (!is_null($value)) {
-                                // Slug do nome
-                                if ($headersFile[$c] == 'name') {
-                                    $slug = Str::slug((string) $value);
-                                    $valuesFile[$r]['slug'] = $slug;
-                                }
-
-                                $valuesFile[$r][$headersFile[$c]] = (string) $value;
-                                $valuesFile[$r]['companyId'] = $company->id;
-                                $valuesFile[$r]['nicheId'] = $data->nicheId;
-                                $valuesFile[$r]['cityId'] = $data->cityId;
-                                $valuesFile[$r]['statusId'] = 1;
+                            //if (!is_null($value)) {
+                            // Slug do nome
+                            if ($headersFile[$c] == 'name') {
+                                $slug = Str::slug((string) $value);
+                                $valuesFile[$r]['slug'] = $slug;
                             }
+
+                            $valuesFile[$r][$headersFile[$c]] = (string) $value;
+                            $valuesFile[$r]['companyId'] = $company->id;
+                            $valuesFile[$r]['nicheId'] = $data->nicheId;
+                            $valuesFile[$r]['cityId'] = $data->cityId;
+                            $valuesFile[$r]['statusId'] = 1;
+                            //}
                         }
                     } // Percorre colunas
                 } // Percorre linhas
@@ -88,6 +88,7 @@ class SpreadSheetService
             } // Se arquivo presente
 
         } catch (\Exception $e) {
+
             return [
                 'success' => false,
                 'message' => 'Erro ao cadastrar leads.',

@@ -18,22 +18,23 @@ class LeadController extends Controller
 
     private $service;
 
-    public function __construct(LeadService $service){
+    public function __construct(LeadService $service)
+    {
 
         $this->service = $service;
-
     }
 
     /**
      * Displays a list of customers returned by the Google Places API
      */
-     public function leadsSearch(Request $request){
+    public function leadsSearch(Request $request)
+    {
 
         $return = $this->service->leadsSearch($request);
 
         $session = ['status' => $return['success'], 'message' => $return['message']];
 
-        if($session['status']){
+        if ($session['status']) {
             return Redirect::route('leads.message')->with([
                 'session' => $session,
                 'leads' => $return['data']
@@ -41,35 +42,34 @@ class LeadController extends Controller
         }
 
         return Redirect::route('dashboard')->with('success', $session);
+    } // leadsSearch()
 
-     } // leadsSearch()
-
-     /**
-      * Mostrar listagem de leads retornado pela Google Places API
+    /**
+     * Mostrar listagem de leads retornado pela Google Places API
      */
-     public function leadsMessage(){
+    public function leadsMessage()
+    {
 
         $session = session('session');
         $leads = session('leads');
 
-        if($leads){
+        if ($leads) {
 
             return view('leads-message')->with([
                 'session' => $session,
                 'leads' => $leads
             ]);
-
         }
 
         return Redirect::route('dashboard')->with('success', $session);
-     } // leadsMessage()
+    } // leadsMessage()
 
     /**
      * Display a listing of the resource through query.
      */
     public function search(Request $request)
     {
-        
+
         $search = $request->search;
         $search = $request->search ? $request->search : '';
         //dd($request->query());
@@ -85,23 +85,23 @@ class LeadController extends Controller
 
         $where[] = ['name', 'like', '%' . $search . '%'];
 
-        if($withWhatsapp){
+        if ($withWhatsapp) {
             $where[] = ['phone', 'IS NOT', NULL];
         }
 
-        if($status){
+        if ($status) {
             $where[] = ['statusId', '=', $status];
         }
 
-        if($lastContact){
+        if ($lastContact) {
             $where[] = ['lastContact', 'like', '%' . $lastContact . '%'];
         }
 
-        if($callScheduled){
+        if ($callScheduled) {
             $where[] = ['callScheduled', 'like', '%' . $callScheduled . '%'];
         }
 
-        if($created_at){
+        if ($created_at) {
             $where[] = ['created_at', '=', $created_at];
         }
 
@@ -109,12 +109,12 @@ class LeadController extends Controller
 
         $perPage = 10; // Número de itens por página
         $page = $request->get('page', 1); // Pega o número da página da requisição, padrão é 1
-        
+
         $totalQuery = $company->leads()->where($where)
-        ->count();
+            ->count();
 
         $entity = $company->leads()->where($where)->orderby('id', 'desc')
-        ->paginate($perPage, ['*'], 'page', $page);
+            ->paginate($perPage, ['*'], 'page', $page);
 
         $html = view('admin.leads.body-table')->with('entity', $entity)->render();
 
@@ -126,8 +126,9 @@ class LeadController extends Controller
             'from' => $entity->firstItem(),
             'to' => $entity->lastItem(),
             'html' => $html
-        ]); die;
-    }
+        ]);
+        die;
+    } // search()
 
     /**
      * Display a listing of the resource.
@@ -143,10 +144,10 @@ class LeadController extends Controller
         $page = $request->get('page', 1); // Pega o número da página da requisição, padrão é 1
 
         $totalQuery = $company->leads()->get()
-        ->count();
+            ->count();
 
         $entity = $company->leads()->orderby('id', 'desc')
-        ->paginate($perPage, ['*'], 'page', $page);
+            ->paginate($perPage, ['*'], 'page', $page);
 
         return view('admin.leads.index')->with([
             'total' => $totalQuery,
@@ -184,7 +185,6 @@ class LeadController extends Controller
     {
         $return = $this->service->store($request);
         return Redirect::route('leads.index')->with('success', $return);
-        
     }
 
     /**
@@ -194,11 +194,11 @@ class LeadController extends Controller
     {
         $user = Auth::user();
         $company = $user->company()->first();
-        
-        if($company->id == $lead->companyId){
+
+        if ($company->id == $lead->companyId) {
             $entity = $lead;
             return view('admin.leads.show')->with(compact('entity'));
-         }
+        }
 
         $return = ['success' => false, 'message' => 'Você não tem permissão.'];
         return Redirect::route('leads.index')->with('success', $return);
@@ -211,8 +211,8 @@ class LeadController extends Controller
     {
         $user = Auth::user();
         $company = $user->company()->first();
-        
-        if($company->id == $lead->companyId){
+
+        if ($company->id == $lead->companyId) {
             $entity = $lead;
 
             $statuses = $company->statuses()->orderby('name', 'ASC')->get();
@@ -220,7 +220,7 @@ class LeadController extends Controller
 
             $states = State::orderby('name', 'ASC')->get();
 
-            if($lead->cityId){
+            if ($lead->cityId) {
                 $city = City::find($lead->cityId);
             }
 
@@ -228,7 +228,7 @@ class LeadController extends Controller
             $cities = City::where('uf', $stateUf)->orderby('nome', 'ASC')->get();
 
             return view('admin.leads.edit')->with(compact('entity', 'statuses', 'niches', 'states', 'cities', 'city'));
-         }
+        }
 
         $return = ['success' => false, 'message' => 'Você não tem permissão.'];
         return Redirect::route('leads.index')->with('success', $return);
@@ -242,7 +242,6 @@ class LeadController extends Controller
 
         $return = $this->service->update($request, $lead);
         return Redirect::route('leads.edit', $lead->id)->with('success', $return);
-
     }
 
     /**
