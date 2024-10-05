@@ -74,7 +74,7 @@ jQuery(function($){
             beforeSend: function () {
                 $('.body-table table tbody').html(`
                     <tr>
-                        <td colspan="4">
+                        <td colspan="8">
                             <div class="spinner"></div>
                         </td>
                     </tr>`);

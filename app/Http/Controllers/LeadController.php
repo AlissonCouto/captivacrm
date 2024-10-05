@@ -102,7 +102,7 @@ class LeadController extends Controller
         }
 
         if ($created_at) {
-            $where[] = ['created_at', '=', $created_at];
+            $where[] = ['created_at', 'like', '%' . $created_at . '%'];
         }
 
         /* Filtros */

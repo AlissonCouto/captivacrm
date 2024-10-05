@@ -1,63 +1,81 @@
 @if($entity->count())
-    @foreach($entity as $row)
-    <tr>
-                            <td>{{$row->name}}</td>
-                            <td>
-                            
-                                @if($row->phone)
-                                    <a href="https://api.whatsapp.com/send?phone=55{{ str_replace(['(', ')', '-', ' '], ['', '', '', ''], $row->phone) }}" target="_blank"><span class="whatsapp"><i class="mdi mdi-whatsapp icon"></i></span> {{$row->phone}}</a>
-                                @else
-                                    --
-                                @endif
+                @foreach($entity as $row)
+                <tr>
+                    <td>{{$row->name}}</td>
+                    <td>
 
-                            </td>
-                            <td>{{$row->website ? $row->website : '--'}}</td>
-                            <td>
+                        @if($row->phone)
+                        <a href="https://api.whatsapp.com/send?phone=55{{ str_replace(['(', ')', '-', ' '], ['', '', '', ''], $row->phone) }}" target="_blank"><span class="whatsapp"><i class="mdi mdi-whatsapp icon"></i></span> {{$row->phone}}</a>
+                        @else
+                        --
+                        @endif
 
-                                @php
-                                    $niche = $row->niche()->first();
-                                @endphp
+                    </td>
+                    
+                    <td class="website">
 
-                                {{ $niche ? $niche->name : '--' }}
-                            </td>
-                            
-                            <td>
+                        @if($row->website)
+                        <a href="{{$row->website}}" target="_blank">{{$row->website}}</a>
+                        @else
+                        ----
+                        @endif
 
-                                @php
-                                    $city = $row->city()->first();
-                                @endphp
+                    </td>
 
-                                {{ $city ? $city->nome : '--' }}
-                            </td>
+                    <td>
 
-                            <td>
-                                {{ $city ? $city->uf : '--' }}
-                            </td>
+                        @php
+                        $niche = $row->niche()->first();
+                        @endphp
 
-                            <td>
-                                <div class="actions">
+                        {{ $niche ? $niche->name : '--' }}
+                    </td>
 
-                                    <div class="action details">
-                                        <a href="{{route('leads.show', $row->id)}}"><i class="mdi mdi-magnify"></i></a>
-                                    </div>
+                    <td>
 
-                                    <div class="action edit">
-                                        <a href="{{route('leads.edit', $row->id)}}"><i class="mdi mdi-pencil icon"></i></a>
-                                    </div>
+                        @php
+                        $city = $row->city()->first();
+                        @endphp
 
-                                    <div class="action delete">
-                                        <a href="{{route('leads.destroy', $row->id)}}"><i class="mdi mdi-delete icon"></i></a>
-                                    </div>
+                        {{ $city ? $city->nome : '--' }}
+                    </td>
 
-                                </div>
-                            </td>
+                    <td>
+                        {{ $city ? $city->uf : '--' }}
+                    </td>
 
-                        </tr>
-    @endforeach
-@else
-    <tr>
-        <td colspan="6" class="text-center pt-5">
-            <h1 class="h1">Nenhum registro encontrado</h1>
-        </td>
-    </tr>
-@endif
+                    <td>
+                        {{ $row->status == 1 ? 'Sim' : 'Não' }}
+                    </td>
+
+                    <td>
+                        <div class="actions">
+
+                            <div class="action chat">
+                                <a href="{{route('chat.index', $row->id)}}"><i class="mdi mdi-chat"></i></a>
+                            </div>
+
+                            <div class="action details">
+                                <a href="{{route('leads.show', $row->id)}}"><i class="mdi mdi-magnify"></i></a>
+                            </div>
+
+                            <div class="action edit">
+                                <a href="{{route('leads.edit', $row->id)}}"><i class="mdi mdi-pencil icon"></i></a>
+                            </div>
+
+                            <div class="action delete">
+                                <a href="{{route('leads.destroy', $row->id)}}"><i class="mdi mdi-delete icon"></i></a>
+                            </div>
+
+                        </div>
+                    </td>
+
+                </tr>
+                @endforeach
+                @else
+                <tr>
+                    <td colspan="8" class="text-center pt-5">
+                        <h1 class="h1">Nenhum registro encontrado</h1>
+                    </td>
+                </tr>
+                @endif

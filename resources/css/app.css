@@ -155,7 +155,7 @@ html {
 .app-container .sidebar {
   background-color: #1660FF;
   width: 76px;
-  height: 100vh;
+  min-height: 100vh;
   border-top-right-radius: 10px;
 }
 .app-container .sidebar .menu {
@@ -201,7 +201,7 @@ html {
 }
 .app-container .workspace .toolbar {
   margin-top: 24px;
-  padding: 24px;
+  padding: 0 24px;
   background-color: #fff;
   border-radius: 10px;
   width: 100%;
@@ -213,7 +213,7 @@ html {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 50%;
+  width: 100%;
 }
 .app-container .workspace .toolbar .operations .form-container {
   width: 80%;
@@ -438,6 +438,9 @@ html {
   font-size: 1.5rem;
   color: #fff;
   border-radius: 5px;
+}
+.app-container .workspace .table-container .body-table table tbody .website {
+  color: #1660FF;
 }
 .app-container .workspace .table-container .body-table table tbody .actions {
   display: flex;

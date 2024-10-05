@@ -141,7 +141,17 @@
                         @endif
 
                     </td>
-                    <td>{{$row->website ? $row->website : '--'}}</td>
+                    
+                    <td class="website">
+
+                        @if($row->website)
+                        <a href="{{$row->website}}" target="_blank">{{$row->website}}</a>
+                        @else
+                        ----
+                        @endif
+
+                    </td>
+
                     <td>
 
                         @php
